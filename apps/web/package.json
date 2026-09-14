@@ -1,0 +1,32 @@
+{
+  "name": "@starwright/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@starwright/ai": "workspace:*",
+    "@starwright/data": "workspace:*",
+    "@starwright/engine": "workspace:*",
+    "dexie": "^4.4.6",
+    "i18next": "^26.4.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^17.0.14",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.4",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.0",
+    "vite-plugin-static-copy": "^4.1.1",
+    "vitest": "^5.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+dist
+dist-types
+node_modules
+pdfs/
+coverage
+*.tsbuildinfo
+.vite
+.DS_Store
