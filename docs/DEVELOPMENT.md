@@ -349,7 +349,12 @@ interface SaveFile {
 ### 8.6 构建与部署
 
 - Vite 静态目录：`index.html` + 带 hash 的分包 JS/CSS + `starforged.json` / `starforged.zh.json` 独立资源文件（启动按 UI 语言 fetch 其一，zh 缺失回退 en）。
-- 托管：GitHub Pages / Netlify / Cloudflare Pages；页面含 CC-BY 4.0 署名（关于页 + README attribution 块）。
+- 托管：**GitHub Pages（当前生产）** / Netlify / Cloudflare Pages（备选）；页面含 CC-BY 4.0 署名（关于页 + README attribution 块）。
+- **GitHub Pages 配置**：
+  - 仓库 `foodfix/starwright`，站点地址 `https://foodfix.github.io/starwright/`（项目页为子路径）。
+  - `apps/web/vite.config.ts` 固定 `base: '/starwright/'`（本地 dev 与构建一致走 `/starwright/` 前缀，dev 访问 `http://localhost:5173/starwright/`）；应用内所有资源引用必须经 `import.meta.env.BASE_URL` 拼接（数据加载已如此，见 `App.tsx`），禁止裸 `/xxx` 绝对路径 fetch。
+  - 部署走 GitHub Actions：`.github/workflows/deploy.yml`（push 到 `main` 或手动触发）→ pnpm 构建 → 上传 `apps/web/dist` → `actions/deploy-pages`。仓库 Settings → Pages → Source 需选 **GitHub Actions**（一次性手动设置，无 CLI/Token 时无法代配）。
+  - 部署前本地验证：`pnpm build`（构建本身即 typecheck 入口）+ `pnpm --filter @starwright/web preview` 检查子路径下资源可加载。
 - 文档说明：HTTPS 站点下本地 Ollama 需配置 `OLLAMA_ORIGINS`；`baseUrl` 可指向未来自建代理。
 - **安全边界**：Key 只在浏览器内存/localStorage；无任何遥测。
 

@@ -23,6 +23,9 @@ function serveStarforged(): Plugin {
 }
 
 export default defineConfig({
+  // GitHub Pages project site serves the app from /starwright/; keep dev, build,
+  // and preview on the same subpath (see docs/DEVELOPMENT.md §8.6)
+  base: '/starwright/',
   plugins: [
     react(),
     serveStarforged(),
