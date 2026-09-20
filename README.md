@@ -4,6 +4,8 @@
 
 **Starwright** — [Ironsworn: Starforged](https://www.ironswornrpg.com) 的 AI Game Master：一款浏览器单人 RPG，AI 扮演 GM 负责叙事与决策，规则引擎负责一切机制结算并拥有唯一权威，玩家以自由文字扮演自己的角色。
 
+**Play online / 在线游玩**: <https://foodfix.github.io/starwright/>
+
 > Unofficial fan tool — not affiliated with or endorsed by Shawn Tomkin or Tomkin Press. / 非官方粉丝工具，与原作者及 Tomkin Press 无隶属或背书关系。
 
 ## Highlights / 特性
@@ -21,7 +23,7 @@ Requirements: Node ≥ 20 and pnpm.
 
 ```bash
 pnpm install
-pnpm dev          # http://localhost:5173
+pnpm dev          # http://localhost:5173/starwright/
 ```
 
 Then in the app:
@@ -57,7 +59,7 @@ See `docs/DEVELOPMENT.md` (Chinese) for the authoritative development spec, incl
 
 The build is a fully static site (`apps/web/dist/`, includes `starforged.json` as a static asset). Any static host works — GitHub Pages, Netlify, Cloudflare Pages.
 
-- GitHub Pages project site: build with a sub-path base, e.g. `pnpm --filter @starwright/web exec vite build --base=/starwright/`, and publish `apps/web/dist`.
+- Production: hosted on GitHub Pages at <https://foodfix.github.io/starwright/>. Pushes to `main` auto-deploy via `.github/workflows/deploy.yml`; the `/starwright/` sub-path base is baked into `apps/web/vite.config.ts` (see `docs/DEVELOPMENT.md` §8.6). One-time setup: repo Settings → Pages → Source → GitHub Actions. / 生产环境托管于 GitHub Pages，push 到 `main` 即自动部署；子路径 base 固化在 `vite.config.ts`。
 - HTTPS sites calling a local Ollama endpoint must set `OLLAMA_ORIGINS` to allow browser access (CORS).
 - No telemetry, no backend: the player's key stays in `localStorage` and requests go straight to their chosen endpoint.
 
