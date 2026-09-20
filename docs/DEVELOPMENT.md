@@ -355,6 +355,7 @@ interface SaveFile {
   - `apps/web/vite.config.ts` 固定 `base: '/starwright/'`（本地 dev 与构建一致走 `/starwright/` 前缀，dev 访问 `http://localhost:5173/starwright/`）；应用内所有资源引用必须经 `import.meta.env.BASE_URL` 拼接（数据加载已如此，见 `App.tsx`），禁止裸 `/xxx` 绝对路径 fetch。
   - 部署走 GitHub Actions：`.github/workflows/deploy.yml`（push 到 `main` 或手动触发）→ pnpm 构建 → 上传 `apps/web/dist` → `actions/deploy-pages`。仓库 Settings → Pages → Source 需选 **GitHub Actions**（一次性手动设置，无 CLI/Token 时无法代配）。
   - 部署前本地验证：`pnpm build`（构建本身即 typecheck 入口）+ `pnpm --filter @starwright/web preview` 检查子路径下资源可加载。
+  - **itch.io 页面**：上传包 `starwright-itch.zip` 用 `pnpm --filter @starwright/web exec vite build --base=./` 生成（相对路径才能在 itch iframe 内运行）；封面源文件 `itch/cover.svg`，经 `rsvg-convert -w 630 -h 500 itch/cover.svg -o itch/cover.png` 出 630×500 PNG（无 CJK 字形，图中语言用 "EN / ZH" 表示）。
 - 文档说明：HTTPS 站点下本地 Ollama 需配置 `OLLAMA_ORIGINS`；`baseUrl` 可指向未来自建代理。
 - **安全边界**：Key 只在浏览器内存/localStorage；无任何遥测。
 
